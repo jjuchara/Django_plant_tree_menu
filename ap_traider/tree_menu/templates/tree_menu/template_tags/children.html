@@ -1,0 +1,13 @@
+{% load tree_menu %}
+<ul class="nav-item">
+    {% for child in children %}
+        <li class="nav-item list-unstyled">
+            <a {% if child.get_absolute_url == request.path_info %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+               class="nav-link"
+               href="{{ child.get_absolute_url }}">{{ child }}</a>
+        </li>
+        {% if child.children.all %}
+            {% show_children child %}
+        {% endif %}
+    {% endfor %}
+</ul>
